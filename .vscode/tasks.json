@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "--std", "c++14",
+                "-Wall",
+                "-Wno-unknown-pragmas",
+                "-g", "src/Estruturas/Corredor/Corredor.cc",
+                "-g", "src/Algoritmos/Dijkstra/Dijkstra.cc",
+                "-g", "src/Estruturas/Grafo/Grafo.cc",
+                "-g", "src/Algoritmos/Dfs/Dfs.cc",
+                "-g", "src/main/main.cc",
+                "-o", "bin/tp1"
+            ],
+        },
+    ]
+}

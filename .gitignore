@@ -1,0 +1,10 @@
+*.o
+*.swp
+*.bkp
+*.csv
+bin/*
+*.zip
+data/
+!data/entrada
+!data/saida
+*.out
