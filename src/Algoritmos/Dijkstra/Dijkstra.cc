@@ -9,32 +9,31 @@
 #include "Dijkstra.h"
 #include "../../Estruturas/Corredor/Corredor.h"
 
-using namespace Util;
-
 namespace Algoritmos {
-    std::tuple<std::vector<peso_t>, std::vector<vertice_t> > Dijkstra::operator()(vertice_t origem,
-                          const std::vector<std::vector<std::shared_ptr<Corredor> > > &lista_adjacencia)
+    std::tuple<std::vector<Tipos::peso_t>, std::vector<Tipos::vertice_t> > Dijkstra::operator()(
+        Tipos::vertice_t origem,
+        const std::vector<std::vector<std::shared_ptr<Corredor> > > &lista_adjacencia)
     {
-        std::vector<peso_t> distancia_minima;
         unsigned long tam_lista_adjacencia = lista_adjacencia.size();
-        distancia_minima.resize(tam_lista_adjacencia, std::numeric_limits<peso_t>::infinity());
+
+        std::vector<Tipos::peso_t> distancia_minima(tam_lista_adjacencia, std::numeric_limits<Tipos::peso_t>::infinity());
+        std::vector<Tipos::vertice_t> predecessores(tam_lista_adjacencia, -1);
+        std::set<std::pair<Tipos::peso_t, Tipos::vertice_t> > fila_vertices;
+        
         distancia_minima[origem] = 0;
-        std::vector<vertice_t> predecessores(tam_lista_adjacencia, -1);
-        std::set<std::pair<peso_t, vertice_t> > fila_vertices;
         fila_vertices.insert(std::make_pair(distancia_minima[origem], origem));
     
         while (!fila_vertices.empty()) 
         {
-            peso_t dist = fila_vertices.begin()->first;
-            vertice_t num_vizinho = fila_vertices.begin()->second;
+            Tipos::peso_t dist = fila_vertices.begin()->first;
+            Tipos::vertice_t num_vizinho = fila_vertices.begin()->second;
             fila_vertices.erase(fila_vertices.begin());
     
-            const std::vector<std::shared_ptr<Corredor> > &corredores = lista_adjacencia[num_vizinho];
-            for (auto &&corredor_it : corredores) {
-                auto corredor = *corredor_it;
-                vertice_t vertice = corredor.num_vertice;
-                peso_t peso = corredor.distancia;
-                peso_t distance_through_u = dist + peso;
+            for (auto &&corredor_it : lista_adjacencia[num_vizinho]) {
+                auto corredor = *corredor_it.get();
+                Tipos::vertice_t vertice = corredor.num_vertice;
+                Tipos::peso_t peso = corredor.distancia;
+                Tipos::peso_t distance_through_u = dist + peso;
                 if (distance_through_u < distancia_minima[vertice]) {
                     fila_vertices.erase(std::make_pair(distancia_minima[vertice], vertice));
                     distancia_minima[vertice] = distance_through_u;
@@ -48,16 +47,16 @@ namespace Algoritmos {
 
     void Dijkstra::imprime_caminho_minimo (
         FILE *arq_saida,
-        std::tuple<std::vector<peso_t>, std::vector<vertice_t> > &tupla_caminho,
-        vertice_t vertice) {
+        std::tuple<std::vector<Tipos::peso_t>, std::vector<Tipos::vertice_t> > &tupla_caminho,
+        Tipos::vertice_t vertice) {
         auto predecessores = std::get<1>(tupla_caminho);
         if (vertice == -1) return;
-        imprime_caminho_minimo(arq_saida, tupla_caminho, (vertice_t)predecessores[vertice]);
+        imprime_caminho_minimo(arq_saida, tupla_caminho, (Tipos::vertice_t)predecessores[vertice]);
         // auto pesos = std::get<0>(tupla_caminho);
-        if (vertice != (vertice_t)predecessores.size())
-            fprintf(arq_saida, "%d - ", vertice);
+        if (vertice != (Tipos::vertice_t)predecessores.size())
+            fprintf(arq_saida, "%ld - ", vertice);
         else 
-            fprintf(arq_saida, "%d\n", vertice);
+            fprintf(arq_saida, "%ld\n", vertice);
         return;
         // while (vertice != -1) {
         //     std::cout << vertice << " - ";

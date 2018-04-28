@@ -10,12 +10,12 @@
 
 #include "../Estruturas/Corredor/Corredor.h"
 #include "../Algoritmos/Dijkstra/Dijkstra.h"
+#include "../Algoritmos/Pontes/Pontes.h"
 #include "../Estruturas/Grafo/Grafo.h"
 #include "../Algoritmos/Dfs/Dfs.h"
-#include "../Util/Util.h"
+#include "../Util/Tipos.h"
 
 using namespace Algoritmos;
-using namespace Util;
 using namespace std;
 
 int main(int argc, char **argv) {
@@ -56,12 +56,21 @@ int main(int argc, char **argv) {
     }
 
     auto tupla_caminho_minimo = Dijkstra()(1, corredores_adjacentes);
-    Dijkstra::imprime_caminho_minimo(arq_saida, tupla_caminho_minimo, (vertice_t)corredores_adjacentes.size() - 1);
+    Dijkstra::imprime_caminho_minimo(arq_saida, tupla_caminho_minimo, (Tipos::vertice_t)corredores_adjacentes.size() - 1);
 
     auto transposto = Grafo::calcula_grafo_transposto(corredores_adjacentes);
+    auto tupla_caminho_minimo_transposto = Dijkstra()(transposto.size() - 1, transposto);
 
     // Algoritmos::Dfs()(corredores_adjacentes, 1, corredores_adjacentes.size() - 1, std::get<0>(tupla_caminho_minimo));
     // Numero corredores R utilizados no trajeto 
+
+    auto lista_adj_nao_direcionada = Grafo::determina_todas_arestas_caminho_minimo (
+        corredores_adjacentes,
+        std::get<0>(tupla_caminho_minimo),
+        std::get<0>(tupla_caminho_minimo_transposto));
+    
+    // Pontes::calcula_pontes(corredores_adjacentes);
+    Pontes::identifica_pontes_iterativo (corredores_adjacentes, lista_adj_nao_direcionada, 1);
 
     fclose(arq_entrada);
     fclose(arq_saida);

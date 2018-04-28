@@ -3,18 +3,26 @@
 
 #include <vector>
 #include <memory>
+#include <set>
 
 #include "../../Estruturas/Corredor/Corredor.h"
-#include "../../Util/Util.h"
-
-using namespace Util;
+#include "../../Util/Tipos.h"
 
 namespace Algoritmos {
     struct Pontes {
-        std::vector<std::shared_ptr<Corredor> > descobre_pontes (
+        static void calcula_pontes (std::vector<std::vector<std::shared_ptr<Corredor> > >&);
+
+        static void articulation_point_and_bridge (
             std::vector<std::vector<std::shared_ptr<Corredor> > >&,
-            vertice_t, vertice_t, int=0
-        );
+            std::vector<int64_t> &,
+            std::vector<int64_t> &,
+            std::vector<int64_t> &,
+            Tipos::vertice_t, Tipos::vertice_t, int* , int*, std::set<Tipos::vertice_t>&);
+        
+        static void identifica_pontes_iterativo (
+            std::vector<std::vector<std::shared_ptr<Corredor> > >&,
+            std::vector<std::vector<std::shared_ptr<Corredor> > >&,
+            Tipos::vertice_t);
     };
 }
 

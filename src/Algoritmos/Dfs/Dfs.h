@@ -4,15 +4,13 @@
 #include <vector>
 #include <memory>
 #include "../../Estruturas/Corredor/Corredor.h"
-#include "../../Util/Util.h"
-
-using namespace Util;
+#include "../../Util/Tipos.h"
 
 namespace Algoritmos {
     struct Dfs {
         void operator() (
             const std::vector<std::vector<std::shared_ptr<Corredor> > > &,
-            vertice_t, vertice_t, std::vector<peso_t> &
+            Tipos::vertice_t, Tipos::vertice_t, std::vector<Tipos::peso_t> &
         );
     };
 }

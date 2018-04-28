@@ -2,14 +2,14 @@
 #define CORREDOR_H
 
 #include <cinttypes>
+#include "../../Util/Tipos.h"
 
 struct Corredor {
-    int num_corredor;
-    int num_vertice;
-    int64_t distancia;
-    int cor;
+    uint64_t num_corredor;
+    uint64_t num_vertice;
+    double distancia;
 
-    Corredor(int, int, int64_t);
+    Corredor(uint64_t, uint64_t, double);
 };
 
 #endif
