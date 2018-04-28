@@ -8,7 +8,10 @@ namespace Util {
 
     typedef int vertice_t;
     typedef double peso_t;
-    
+
+    static int DFS_WHITE = -1;
+    static int DFS_BLACK = 1;
+    static int DFS_GRAY = 0;
 }
 
 #endif

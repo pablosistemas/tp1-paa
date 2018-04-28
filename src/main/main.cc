@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
 
     auto transposto = Grafo::calcula_grafo_transposto(corredores_adjacentes);
 
-    Algoritmos::Dfs()(corredores_adjacentes, 1, corredores_adjacentes.size() - 1, std::get<0>(tupla_caminho_minimo));
+    // Algoritmos::Dfs()(corredores_adjacentes, 1, corredores_adjacentes.size() - 1, std::get<0>(tupla_caminho_minimo));
     // Numero corredores R utilizados no trajeto 
 
     fclose(arq_entrada);
