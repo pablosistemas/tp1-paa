@@ -63,6 +63,7 @@ namespace Algoritmos {
     }
 
     void Pontes::identifica_pontes_iterativo (
+        FILE *arq_saida,
         std::vector<std::vector<std::shared_ptr<Corredor> > >& original,
         std::vector<std::vector<std::shared_ptr<Corredor> > >& lista_adjacencias,
         Tipos::vertice_t vertice_raiz
@@ -73,7 +74,6 @@ namespace Algoritmos {
         std::vector<int64_t> dfs_parent(n, -1);
         std::vector<bool> visitados(n, false);
         std::vector<bool> em_fila(n, false);
-        Tipos::vertice_t destino = (Tipos::vertice_t)(lista_adjacencias.size() - (unsigned long)1);
         int64_t dfs_contador = 0;
 
         std::stack<Tipos::vertice_t> Q;
@@ -95,7 +95,7 @@ namespace Algoritmos {
                     dfs_parent[it->get()->num_vertice] = vertice;
                 } else if (em_fila[it->get()->num_vertice]) {
                     dfs_parent[it->get()->num_vertice] = vertice;
-                } else if (dfs_parent[vertice] != it->get()->num_vertice) {
+                } else if (dfs_parent[vertice] != (int64_t)it->get()->num_vertice) {
                     if (dfs_low[it->get()->num_vertice] < dfs_low[vertice]) {
                         dfs_low[vertice] = dfs_low[it->get()->num_vertice];
                         Tipos::vertice_t aux = dfs_parent[vertice];
@@ -111,14 +111,26 @@ namespace Algoritmos {
         }
 
         Tipos::vertice_t vertice_atual = 1;
-
+        std::set<Tipos::vertice_t> pontes;
         for(auto it = original.begin() + 1; it != original.end(); it++) {
             for (auto iti = it->begin(); iti != it->end(); iti++) {
                 if (iti->get()->distancia != std::numeric_limits<double>::infinity() && (dfs_low[iti->get()->num_vertice] > dfs_num[vertice_atual])) {
-                    printf ("Ponte: %d\n", iti->get()->num_corredor);
+                    // printf ("Ponte: %d\n", iti->get()->num_corredor);
+                    pontes.insert(iti->get()->num_corredor);
                 }
             }
             vertice_atual++;
         }
+        auto last_it = pontes.end();
+        fprintf (arq_saida, "%lu\n", (unsigned long)pontes.size());
+        
+        if (pontes.size() > 0) {
+            std::advance(last_it, -1);
+            for (auto itp = pontes.begin(); itp != last_it; itp++) {
+                fprintf (arq_saida, "%ld ", *itp);
+            }
+            fprintf (arq_saida, "%ld", *last_it);
+        }
+        fprintf (arq_saida, "\n");
     }
 }

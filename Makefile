@@ -21,7 +21,7 @@ PROGRAM	= tp1
 OBJECTS	= (SOURCES: .cc = .o)
 
 INPUT	= entrada
-TARGET	= saida
+OUTPUT	= saida
 
 all : $(PROGRAM)
 
@@ -45,7 +45,7 @@ tp1: Grafo.o Corredor.o Dfs.o Dijkstra.o Pontes.o $(MAIN)
 	rm ./*.o
 
 clean:
-	rm *.o bin/$(PROGRAM)
+	rm *.o $(BIN_FOLDER)/$(PROGRAM)
 
 run:
-	./$(PROGRAM) $(INPUT) $(TARGET)
+	$(BIN_FOLDER)/$(PROGRAM) $(INPUT) $(OUTPUT)

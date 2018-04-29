@@ -20,6 +20,7 @@ namespace Algoritmos {
             Tipos::vertice_t, Tipos::vertice_t, int* , int*, std::set<Tipos::vertice_t>&);
         
         static void identifica_pontes_iterativo (
+            FILE *,
             std::vector<std::vector<std::shared_ptr<Corredor> > >&,
             std::vector<std::vector<std::shared_ptr<Corredor> > >&,
             Tipos::vertice_t);

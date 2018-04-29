@@ -50,29 +50,29 @@ int main(int argc, char **argv) {
 
     for (unsigned long M = 1; M <= num_corredores_permitidos; M++) {
         fscanf(arq_entrada, "%d %d %ld\n", &local_a, &local_b, &dist_a_b);
-        std::cout << "a: " << local_a << " b: " << local_b << " c: " << dist_a_b << std::endl;
+        // std::cout << "a: " << local_a << " b: " << local_b << " c: " << dist_a_b << std::endl;
         std::shared_ptr<Corredor> s_c (new Corredor(M, local_b, dist_a_b), destrutor_corredor);
         corredores_adjacentes[local_a].push_back(s_c);
     }
 
     auto tupla_caminho_minimo = Dijkstra()(1, corredores_adjacentes);
-    Dijkstra::imprime_caminho_minimo(arq_saida, tupla_caminho_minimo, (Tipos::vertice_t)corredores_adjacentes.size() - 1);
+
+    auto caminhos = std::get<0>(tupla_caminho_minimo);
+    auto pesos_minimo = std::get<1>(tupla_caminho_minimo);
 
     auto transposto = Grafo::calcula_grafo_transposto(corredores_adjacentes);
     auto tupla_caminho_minimo_transposto = Dijkstra()(transposto.size() - 1, transposto);
 
-    // Algoritmos::Dfs()(corredores_adjacentes, 1, corredores_adjacentes.size() - 1, std::get<0>(tupla_caminho_minimo));
-    // Numero corredores R utilizados no trajeto 
-
     auto lista_adj_nao_direcionada = Grafo::determina_todas_arestas_caminho_minimo (
+        arq_saida,
         corredores_adjacentes,
         std::get<0>(tupla_caminho_minimo),
         std::get<0>(tupla_caminho_minimo_transposto));
     
-    // Pontes::calcula_pontes(corredores_adjacentes);
-    Pontes::identifica_pontes_iterativo (corredores_adjacentes, lista_adj_nao_direcionada, 1);
+    Pontes::identifica_pontes_iterativo (arq_saida, corredores_adjacentes, lista_adj_nao_direcionada, 1);
 
     fclose(arq_entrada);
     fclose(arq_saida);
+
     return 0;
 }

@@ -11,6 +11,7 @@ struct Grafo {
         std::vector<std::vector<std::shared_ptr<Corredor> > >&);
     
     static std::vector<std::vector<std::shared_ptr<Corredor> > > determina_todas_arestas_caminho_minimo (
+        FILE *,        
         std::vector<std::vector<std::shared_ptr<Corredor> > >&,
         std::vector<Tipos::peso_t>&,
         std::vector<Tipos::peso_t>&);
