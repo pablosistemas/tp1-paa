@@ -41,6 +41,8 @@ Grafo.o : $(ESTRUTURAS_FOLDER)/Grafo/Grafo.cc
 	$(CC) $(LDFLAGS) $(CFLAGS) $(ESTRUTURAS_FOLDER)/Grafo/Grafo.cc
 
 tp1: Grafo.o Corredor.o Dfs.o Dijkstra.o Pontes.o $(MAIN) 
+	([ -d bin/ ] && rm -rf bin/) || true
+	mkdir bin
 	$(CC) $(CFLAGS) $(SOURCES) $(MAIN) -I $(HEADERS_FOLDER) -o $(BIN_FOLDER)/$(PROGRAM)
 	rm ./*.o
 
