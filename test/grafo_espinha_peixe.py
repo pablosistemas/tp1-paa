@@ -3,12 +3,13 @@ custo = 10**6
 num_vertices_total = 10**4
 num_vertices_espinha = num_vertices_total/2
 num_vert_camada = (num_vertices_espinha - 2)/camadas
+
 if camadas == 1:
-    num_arestas = 2 * (num_vert_camada + 2.0 * num_vert_camada)
+    num_arestas = 2 * (2 * num_vert_camada) + 1
 else:
     num_arestas = 2 * (num_vert_camada * camadas + 2.0 * num_vert_camada)
 
-print("%d %d"%(num_vertices_espinha, num_arestas))
+print("%d %d"%(num_vertices_total, num_arestas))
 
 for start_range in [1, num_vertices_espinha + 1]:
 

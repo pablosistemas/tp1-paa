@@ -1,8 +1,12 @@
-camadas = 2
+camadas = 1
 custo = 10**6
-num_vertices = 8
+num_vertices = 10**4
 num_vert_camada = (num_vertices - 2)/camadas
-num_arestas = num_vert_camada * camadas + 2.0 * num_vert_camada
+
+if (camadas == 1):
+    num_arestas = num_vert_camada * 2
+else:
+    num_arestas = num_vert_camada ** 2 + 2.0 * num_vert_camada
 
 print("%d %d"%(num_vertices, num_arestas))
 
