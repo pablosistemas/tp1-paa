@@ -47,7 +47,8 @@ tp1: Grafo.o Corredor.o Dfs.o Dijkstra.o Pontes.o $(MAIN)
 	rm ./*.o
 
 clean:
-	rm *.o $(BIN_FOLDER)/$(PROGRAM)
+	rm *.o $(BIN_FOLDER)/$(PROGRAM) || true
+	rm -rf bin || true
 
 run:
 	$(BIN_FOLDER)/$(PROGRAM) $(INPUT) $(OUTPUT)
