@@ -1,5 +1,5 @@
-#ifndef UTIL_H
-#define UTIL_H
+#ifndef TIPOS_PRIMARIOS_H
+#define TIPOS_PRIMARIOS_H
 
 #include <functional>
 #include <cinttypes>

@@ -11,6 +11,7 @@
                 "-Wno-unknown-pragmas",
                 "-g", "src/Estruturas/Corredor/Corredor.cc",
                 "-g", "src/Algoritmos/Dijkstra/Dijkstra.cc",
+                "-g", "src/Algoritmos/Pontes/Pontes.cc",
                 "-g", "src/Estruturas/Grafo/Grafo.cc",
                 "-g", "src/Algoritmos/Dfs/Dfs.cc",
                 "-g", "src/main/main.cc",

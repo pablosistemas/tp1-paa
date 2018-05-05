@@ -7,20 +7,18 @@
 #include <cstdio>
 #include <tuple>
 
-#include "../../Util/Tipos.h"
 #include "../../Estruturas/Corredor/Corredor.h"
+#include "../../Estruturas/Grafo/Grafo.h"
+#include "../../Util/Tipos.h"
+
+using namespace std;
 
 namespace Algoritmos {
     struct Dijkstra {
-        std::tuple<std::vector<Tipos::peso_t>, std::vector<Tipos::vertice_t> >  operator()(
+        tuple<vector<Tipos::peso_t>, vector<Tipos::vertice_t> >  operator()(
             Tipos::vertice_t,
-            const std::vector<std::vector<std::shared_ptr<Corredor> > > &
+            const Tipos::Grafo_t &
         );
-
-        static void imprime_caminho_minimo(
-            FILE*,
-            std::tuple<std::vector<Tipos::peso_t>, std::vector<Tipos::vertice_t> > &,
-            Tipos::vertice_t);
     };
 }
 

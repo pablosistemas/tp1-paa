@@ -8,21 +8,23 @@
 #include "../../Estruturas/Corredor/Corredor.h"
 #include "../../Util/Tipos.h"
 
+using namespace std;
+
 namespace Algoritmos {
     struct Pontes {
-        static void calcula_pontes (std::vector<std::vector<std::shared_ptr<Corredor> > >&);
+        static void calcula_pontes (vector<vector<shared_ptr<Corredor> > >&);
 
         static void articulation_point_and_bridge (
-            std::vector<std::vector<std::shared_ptr<Corredor> > >&,
-            std::vector<int64_t> &,
-            std::vector<int64_t> &,
-            std::vector<int64_t> &,
-            Tipos::vertice_t, Tipos::vertice_t, int* , int*, std::set<Tipos::vertice_t>&);
+            vector<vector<shared_ptr<Corredor> > >&,
+            vector<int64_t> &,
+            vector<int64_t> &,
+            vector<int64_t> &,
+            Tipos::vertice_t, Tipos::vertice_t, int* , int*, set<Tipos::vertice_t>&);
         
         static void identifica_pontes_iterativo (
             FILE *,
-            std::vector<std::vector<std::shared_ptr<Corredor> > >&,
-            std::vector<std::vector<std::shared_ptr<Corredor> > >&,
+            vector<vector<shared_ptr<Corredor> > >&,
+            vector<vector<shared_ptr<Corredor> > >&,
             Tipos::vertice_t);
     };
 }

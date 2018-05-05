@@ -6,15 +6,22 @@
 #include "../Corredor/Corredor.h"
 #include "../../Util/Tipos.h"
 
+using namespace std;
+
+namespace Tipos {
+    typedef vector<vector<shared_ptr<Corredor> > > Grafo_t;
+}
+
 struct Grafo {
-    static std::vector<std::vector<std::shared_ptr<Corredor> > > calcula_grafo_transposto(
-        std::vector<std::vector<std::shared_ptr<Corredor> > >&);
+    static Tipos::Grafo_t calcula_grafo_transposto(
+        Tipos::Grafo_t&);
     
-    static std::vector<std::vector<std::shared_ptr<Corredor> > > determina_todas_arestas_caminho_minimo (
+    static Tipos::Grafo_t determina_todas_arestas_caminho_minimo (
         FILE *,        
-        std::vector<std::vector<std::shared_ptr<Corredor> > >&,
-        std::vector<Tipos::peso_t>&,
-        std::vector<Tipos::peso_t>&);
+        Tipos::Grafo_t&,
+        vector<Tipos::peso_t>&,
+        vector<Tipos::peso_t>&);
 };
+
 
 #endif

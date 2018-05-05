@@ -6,11 +6,13 @@
 #include "../../Estruturas/Corredor/Corredor.h"
 #include "../../Util/Tipos.h"
 
+using namespace std;
+
 namespace Algoritmos {
     struct Dfs {
         void operator() (
-            const std::vector<std::vector<std::shared_ptr<Corredor> > > &,
-            Tipos::vertice_t, Tipos::vertice_t, std::vector<Tipos::peso_t> &
+            const vector<vector<shared_ptr<Corredor> > > &,
+            Tipos::vertice_t, Tipos::vertice_t, vector<Tipos::peso_t> &
         );
     };
 }
